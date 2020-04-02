@@ -11,3 +11,14 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+class Search(models.Model):
+    search = models.CharField(max_length=500)
+    created = models.DateTimeField(auto_now=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return '{}'.format(self.search)
+
+    class Meta:
+        verbose_name_plural = 'Searches'

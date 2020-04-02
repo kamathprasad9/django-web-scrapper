@@ -1,4 +1,3 @@
-
  {% load static %}
  <!-- Google font -->
  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -53,15 +52,13 @@
                 </div>
             </div>
             <!-- /LOGO -->
-            {% if user.is_authenticated %}
+            
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
                         <form>
                             <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
+                                 
                             </select>
                             <input class="input" placeholder="Search here">
                             <button class="search-btn">Search</button>
@@ -71,31 +68,9 @@
                 <!-- /SEARCH BAR -->
             
                 <!-- ACCOUNT -->
-                <div class="col-md-3 clearfix">
-                    <div class="header-ctn">
-                        <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Your Wishlist</span>
-                                <div class="qty">2</div>
-                            </a>
-                        </div>
-                        <!-- /Wishlist -->
-
-                    
-
-                    <!-- Menu Toogle -->
-                    <div class="menu-toggle">
-                        <a href="#">
-                            <i class="fa fa-bars"></i>
-                            <span>Menu</span>
-                        </a>
-                    </div>
-                    <!-- /Menu Toogle -->
-                </div>
+                
             </div>
-            {% endif %}
+            
             <!-- /ACCOUNT -->
         </div>
         <!-- row -->
@@ -103,7 +78,7 @@
     <!-- container -->
 </div>
 <!-- /MAIN HEADER -->
-{% if user.is_authenticated %}
+
 <nav id="navigation">
     <!-- container -->
     <div class="container">
@@ -111,7 +86,7 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="{% url 'scrape-home' %}">Home</a></li>
                 <li><a href="#">Hot Deals</a></li>
                 <li><a href="#">Categories</a></li>
                 <li><a href="#">Laptops</a></li>
@@ -125,4 +100,4 @@
     </div>
     <!-- /container -->
 </nav>
-{% endif %}
+<!-- NAVIGATION -->

@@ -72,14 +72,25 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form action="{% url 'new_search' %}" method="post">
-                            <select class="input-select">
-                              
-                            </select>
-                            {% csrf_token %}
-                            <input class="input" placeholder="Search here" type="text" name="search">
-                            <button class="search-btn" type="submit" name="action">Search</button>
-                        </form>
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'new_search' %}" method="post">
+                                <select class="input-select">
+                                
+                                </select>
+                                {% csrf_token %}
+                                <input class="input" placeholder="Search here" type="text" name="search">
+                                <button class="search-btn" type="submit" name="action">Search</button>
+                            </form>
+                        {% else %}
+                            <form>
+                                <select class="input-select">
+                                   
+                                </select>
+                                <input class="input" placeholder="Search here">
+                                <a href="{% url 'login' %}"><button class="search-btn" href="{% url 'login' %}">Search</button></a>
+                            </form>
+                        {% endif %}
+
                     </div>
                 </div>
                 <!-- /SEARCH BAR -->

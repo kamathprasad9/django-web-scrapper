@@ -8,6 +8,7 @@ from . import models
 
 BASE_AMAZON_URL='https://www.amazon.in/s?k={}'
 BASE_FLIPKART_URL='https://www.flipkart.com/search?q={}'
+BASE_SNAPDEAL_URL='https://www.snapdeal.com/search?keyword={}'
 
 # Create your views here.
 def home(request):
@@ -19,8 +20,8 @@ def about(request):
 def new_search(request):
     search=request.POST.get('search')
     models.Search.objects.create(search=search)
-    final_url=BASE_AMAZON_URL.format(quote_plus(search))
-    response=requests.get(final_url)
+    final_amazon_url=BASE_AMAZON_URL.format(quote_plus(search))
+    response=requests.get(final_amazon_url)
     data=response.content
     soup=BeautifulSoup(data,features='html.parser')
     name,amazon_ratings,amazon_name,amazon_img,amazon_price,amazon_link=[],[],[],[],[],[]
@@ -39,7 +40,7 @@ def new_search(request):
                 
                 print(amazon_ratings)
                 if r2==[]:
-                    amazon_ratings.append("Rating Unavailable")
+                    amazon_ratings.append(-1)
                 else:
                     amazon_ratings.append(float(x[0]))
             x.clear()
@@ -102,9 +103,10 @@ def new_search(request):
 
     m=len(amazon_name)
     n=len(amazon_ratings)
-    while n!=m:
-        amazon_ratings.append("Rating Unavailable")
-        n+=1
+    if n<m:
+        while n!=m:
+            amazon_ratings.append(-1)
+            n+=1
     if len(amazon_name)>0:  
         print(amazon_name,len(amazon_price),len(amazon_name),len(amazon_ratings)) 
         for i in range(len(amazon_name)):
@@ -118,10 +120,62 @@ def new_search(request):
 
 
 
+
+
+    #SNAPDEAL STUFF HERE
+    final_SD_url=BASE_SNAPDEAL_URL.format(quote_plus(search))
+    response=requests.get(final_SD_url)
+    data=response.content
+    soup=BeautifulSoup(data,features='html.parser')
+    SD_price,SD_link,SD_name,SD_rating,SD_img=[],[],[],[],[]
+    print()
+    print()
+    temp = 0
+    count = 0
+    image = soup.findChildren('img', { "class" : "product-image" })
+    price = soup.findChildren('span', { "class" : "lfloat product-price" })
+    name = soup.findChildren('p', { "class" : "product-title" })
+    link = soup.findChildren('a', { "class" : "dp-widget-link noUdLine" }, href = True)
+    #print(price)
+    for i in image:
+        if len(SD_img)<3:
+            if i==[]:
+                SD_img.append('NA')
+            else:
+                SD_img.append(i['src'])
+    for j in price:
+        if len(SD_price)<3:
+            if j==[]:
+                SD_price.append('Price Unavailable')
+            else:
+                SD_price.append(j.text)
+    for n in name:
+        if len(SD_name)<3:
+            if n==[]:
+                SD_name.append('Name not available')
+            else:
+                SD_name.append(n.text)
+    for l in link:
+        if len(SD_link)<3:
+            if l==[]:
+                SD_link.append('#')
+            else:
+                SD_link.append(l['href'])
+    print()
+    print()
+    print(SD_img,'\n',SD_price,'\n',SD_name,'\n',SD_link)
+    SD_postings=[]
+    if len(SD_name)>0:
+        for i in range(len(amazon_name)):
+            print(i)
+            SD_postings.append((SD_name[i],SD_link[i],SD_price[i],SD_img[i]))
+    
+
     stuff_for_frontend={
         'search':search,
         'amazon_postings':amazon_postings,
         # 'flipkart_postings': flipkart_postings,
+        'SD_postings': SD_postings,
     }
     return render(request, 'scrape/new_search.html',stuff_for_frontend)
 

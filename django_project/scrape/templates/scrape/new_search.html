@@ -2,8 +2,70 @@
 {% load static %}
 {% block content %}
     
-<h2 style="text-align: center;">{{search | title}}</h2>
-    <!-- SECTION -->
+	<h2 style="text-align: center;">{{search | title}}</h2>
+	
+
+	<!-- SNAPDEAL -->
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					
+
+					<!-- Products tab & slick -->
+					<div class="col-md-12">
+						<div class="row">
+							<div class="products-tabs">
+								<!-- tab -->
+								<div id="tab1" class="tab-pane active">
+									<div class="products-slick" data-nav="#slick-nav-1">
+										
+										{% for post in SD_postings %}		
+											<!-- product -->
+											<div class="product">
+												<div class="product-img">
+													<img src="{{ post.3 }}" alt="">
+													<!-- <img src="{{ post.3.forloop.counter }}" alt=""> -->
+													
+												</div>
+												<div class="product-body">
+													
+													<h3 class="product-name"><a href="{{ post.1 }}" target="_blank">{{ post.0 }}</a></h3>
+													{% ifequal post.2 'NA' %}
+														<h4 class="product-price"> Price Unavailable</h4>
+													{% else %}
+														<h4 class="product-price">{{ post.2 }}</h4>
+													{% endifequal %}
+													<div class="product-rating">
+														<i>Rating Unavailable</i>
+													</div>
+												</div>
+												<div class="add-to-cart">
+													<a href="{{ post.1 }}" target="_blank"><button class="add-to-cart-btn"  target="_blank">Go to SnapDeal</button></a>
+												</div>
+											</div>
+											<!-- /product -->
+										{% endfor %}
+										
+
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+		<!-- /SECTION -->
+		<!-- /SNAPDEAL -->
+
+
+	<!-- AMAZON -->
+	<!-- SECTION -->
+	
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -67,7 +129,7 @@
 													</div>
 												</div>
 												<div class="add-to-cart">
-													<a href="{{ post.1 }}" target="_blank"><button class="add-to-cart-btn"  target="_blank">Go to link</button></a>
+													<a href="{{ post.1 }}" target="_blank"><button class="add-to-cart-btn"  target="_blank">Go to Amazon</button></a>
 												</div>
 											</div>
 											<!-- /product -->
@@ -82,8 +144,12 @@
                 </div>
             </div>
 		</div>
+		<!-- /AMAZON -->
+		
 
+		<!-- FLIPKART -->
 		<!-- SECTION -->
+		
 		<div class="section">
 			<!-- container -->
 			<div class="container">
@@ -117,7 +183,7 @@
 														<h4 class="product-price">Rs. {{ post.2 }}</h4>
 													{% endifequal %}
 													<div class="product-rating">
-															{% ifequal post.4 "Rating Unavailable"%}
+															{% ifequal post.4 -1%}
 																<i>Rating Unavailable</i>
 															{% else %}
 																{% if post.4 > 4.4 %}
@@ -147,7 +213,7 @@
 													</div>
 												</div>
 												<div class="add-to-cart">
-													<a href="{{ post.1 }}" target="_blank"><button class="add-to-cart-btn"  target="_blank">Go to link</button></a>
+													<a href="{{ post.1 }}" target="_blank"><button class="add-to-cart-btn"  target="_blank">Go to Flipkart</button></a>
 												</div>
 											</div>
 											<!-- /product -->
@@ -162,8 +228,12 @@
                 </div>
             </div>
 		</div>
+		
 		<!-- /SECTION -->
-    <h2 style="text-align: center;">{{search | title}}</h2>
+		<!-- /FLIPKART -->
+
+		
+    <!-- <h2 style="text-align: center;">{{search | title}}</h2> -->
     
 
 {% endblock content %}

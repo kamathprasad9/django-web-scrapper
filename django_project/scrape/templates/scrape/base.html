@@ -26,9 +26,9 @@
  <link type="text/css" rel="stylesheet" href="{% static 'scrape/css/style.css' %}"/>
 
     {% if title %}
-        <title>Django scrape - {{ title }}</title>
+        <title>Crawl In - {{ title }}</title>
     {% else %}
-        <title>Django scrape</title>
+        <title>Crawl In </title>
     {% endif %}
 </head>
 <body>
@@ -37,9 +37,9 @@
     <div id="top-header">
       <div class="container">
           <ul class="header-links pull-left">
-              <li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-              <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-              <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+              <li><a><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+              <li><a><i class="fa fa-envelope-o"></i> dummy_email@email.com</a></li>
+              <li><a><i class="fa fa-map-marker"></i> SFIT Borivali, Mumbai</a></li>
           </ul>
           <ul class="header-links pull-right">
               {% if user.is_authenticated %}
@@ -62,7 +62,7 @@
             <!-- LOGO -->
             <div class="col-md-3">
                 <div class="header-logo">
-                    <a href="#" class="logo">
+                    <a href="{% url 'scrape-home' %}" class="logo">
                         <img src="{% static 'scrape/img/logo.png' %}" alt="">
                     </a>
                 </div>
@@ -85,8 +85,8 @@
                             <form>
                                 <select class="input-select">
                                    
-                                </select>
-                                <input class="input" placeholder="Search here">
+                                </select> 
+                                <input class="input" placeholder="Login and search here">
                                 <a href="{% url 'login' %}"><button class="search-btn" href="{% url 'login' %}">Search</button></a>
                             </form>
                         {% endif %}
@@ -115,12 +115,6 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li class="active"><a href="{% url 'scrape-home' %}">Home</a></li>
-                <li><a href="#">Hot Deals</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Accessories</a></li>
             </ul>
             <!-- /NAV -->
         </div>

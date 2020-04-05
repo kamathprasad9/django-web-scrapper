@@ -2188,3 +2188,18 @@ textarea.input {
     margin-top: 10px;
   }
 }
+
+
+.message {
+  height: 150px;
+  padding: 20px;
+}
+
+.login-url {
+  color: blue;
+}
+
+.login-url:hover {
+  color: red;
+  text-decoration: underline;
+}

@@ -169,6 +169,10 @@ def new_search(request):
                     flipkart_name.append(i)
             else:
                 flag = False
+
+        while len(flipkart_rating)!=len(flipkart_name):
+            flipkart_rating.append(-1)
+
         
         price = dataId.findChildren('div', {"class": "_1vC4OE _2rQ-NK"})
         if price == []:
@@ -200,6 +204,7 @@ def new_search(request):
                     if len(flipkart_link)<3:
                         flipkart_link.append("https://www.flipkart.com"+t)
 
+    print(len(flipkart_price),len(flipkart_link),len(flipkart_name),len(flipkart_rating),len(flipkart_img))
     print("FLIPKART\n",flipkart_price,'\n',flipkart_link,'\n',flipkart_name,'\n',flipkart_rating,'\n',flipkart_img)
     flipkart_postings=[]
     if len(flipkart_name)>0:

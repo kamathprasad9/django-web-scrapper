@@ -63,7 +63,7 @@
             <div class="col-md-3">
                 <div class="header-logo">
                     <a href="{% url 'scrape-home' %}" class="logo">
-                        <img src="{% static 'scrape/img/logo.png' %}" alt="">
+                        <img src="{% static 'scrape/img/logo2.png' %}" alt="">
                     </a>
                 </div>
             </div>
@@ -74,19 +74,13 @@
                     <div class="header-search">
                         {% if user.is_authenticated %}
                             <form action="{% url 'new_search' %}" method="post">
-                                <select class="input-select">
-                                
-                                </select>
                                 {% csrf_token %}
-                                <input class="input" placeholder="Search here" type="text" name="search">
+                                <input class="input input-select" placeholder="Search here" type="text" name="search">
                                 <button class="search-btn" type="submit" name="action">Search</button>
                             </form>
                         {% else %}
                             <form>
-                                <select class="input-select">
-                                   
-                                </select> 
-                                <input class="input" placeholder="Login and search here">
+                                <input class="input input-select" placeholder="Login and search here">
                                 <a href="{% url 'login' %}"><button class="search-btn" href="{% url 'login' %}">Search</button></a>
                             </form>
                         {% endif %}

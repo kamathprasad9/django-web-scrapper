@@ -14,10 +14,10 @@ BASE_SNAPDEAL_URL='https://www.snapdeal.com/search?keyword={}'
 
 # Create your views here.
 def home(request):
-    return render(request,'scrape/home.html')
-
-def about(request):
-    return render(request,'scrape/about.html')
+    stuff_for_frontend={
+        'title': "Home",
+    }
+    return render(request,'scrape/home.html',stuff_for_frontend)
 
 def new_search(request):
     search=request.POST.get('search')
@@ -257,6 +257,7 @@ def new_search(request):
     
 
     stuff_for_frontend={
+        'title': search.capitalize(),
         'search':search,
         'amazon_postings':amazon_postings,
         'flipkart_postings': flipkart_postings,

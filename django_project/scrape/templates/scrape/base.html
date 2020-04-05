@@ -6,38 +6,144 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Google font -->
+ <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
-    {% include 'scrape/snippets/header.html' %}
+ <!-- Bootstrap -->
+ <link type="text/css" rel="stylesheet" href="{% static 'scrape/css/bootstrap.min.css' %}"/>
+
+ <!-- Slick -->
+ <link type="text/css" rel="stylesheet" href="{% static 'scrape/css/slick.css' %}"/>
+ <link type="text/css" rel="stylesheet" href="{% static 'scrape/css/slick-theme.css' %}"/>
+
+ <!-- nouislider -->
+ <link type="text/css" rel="stylesheet" href="{% static 'scrape/css/nouislider.min.css' %}"/>
+
+ <!-- Font Awesome Icon -->
+ <link rel="stylesheet" href="{% static 'scrape/css/font-awesome.min.css' %}">
+
+ <!-- Custom stlylesheet -->
+ <link type="text/css" rel="stylesheet" href="{% static 'scrape/css/style.css' %}"/>
 
     {% if title %}
-        <title>Django scrape - {{ title }}</title>
+        <title>Crawl In - {{ title }}</title>
     {% else %}
-        <title>Django scrape</title>
+        <title>Crawl In </title>
     {% endif %}
 </head>
 <body>
-    
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-{{message.tags}}">
-                {{message}}
-              </div>
-            {% endfor %}
-          {% endif %}
-          {% block content %}{% endblock %}
-        </div>
+  <header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+      <div class="container">
+          <ul class="header-links pull-left">
+              <li><a><i class="fa fa-phone"></i> +021-95-51-84</a></li>
+              <li><a><i class="fa fa-envelope-o"></i> dummy_email@email.com</a></li>
+              <li><a><i class="fa fa-map-marker"></i> SFIT Borivali, Mumbai</a></li>
+          </ul>
+          <ul class="header-links pull-right">
+              {% if user.is_authenticated %}
+                  <li><a href="{% url 'logout' %}"><i class="fa fa-user-o"></i> Logout</a></li>
+              {% else %}
+                  <li><a href="{% url 'login' %}"><i class="fa fa-user-o"></i> Login</a></li>
+                  <li><a href="{% url 'register' %}"><i class="fa fa-user-o"></i> Register</a></li>
+              {% endif %}
+          </ul>
       </div>
-    </main>
+    </div>
+    <!-- /TOP HEADER -->
 
+    <!-- MAIN HEADER -->
+  <div id="header">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- LOGO -->
+            <div class="col-md-3">
+                <div class="header-logo">
+                    <a href="{% url 'scrape-home' %}" class="logo">
+                        <img src="{% static 'scrape/img/logo2.png' %}" alt="">
+                    </a>
+                </div>
+            </div>
+            <!-- /LOGO -->
+            
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        {% if user.is_authenticated %}
+                            <form action="{% url 'new_search' %}" method="post">
+                                {% csrf_token %}
+                                <input class="input input-select" placeholder="Search here" type="text" name="search">
+                                <button class="search-btn" type="submit" name="action">Search</button>
+                            </form>
+                        {% else %}
+                            <form>
+                                <input class="input input-select" placeholder="Login and search here">
+                                <a href="{% url 'login' %}"><button class="search-btn" href="{% url 'login' %}">Search</button></a>
+                            </form>
+                        {% endif %}
+
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+            
+                <!-- ACCOUNT -->
+                
+            </div>
+            
+            <!-- /ACCOUNT -->
+        </div>
+        <!-- row -->
+    </div>
+    <!-- container -->
+  </div>
+  <!-- /MAIN HEADER -->
+
+  <nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                <li class="active"><a href="{% url 'scrape-home' %}">Home</a></li>
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+  </nav>
+  <!-- NAVIGATION -->
+</header>
+    
+    
+<main role="main " class="container">
+    <div class="row">
+      <div class="col-md-8">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+              {{message}}
+            </div>
+          {% endfor %}
+        {% endif %}
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </main>
+       
+  <footer id="footer">
     {% include 'scrape/snippets/footer.html' %}
-    <script src="{% static 'scrape/js/jquery.min.js' %}"></script>
+    
+  </footer>
+  <script src="{% static 'scrape/js/jquery.min.js' %}"></script>
 		<script src="{% static 'scrape/js/bootstrap.min.js' %}"></script>
 		<script src="{% static 'scrape/js/slick.min.js' %}"></script>
 		<script src="{% static 'scrape/js/nouislider.min.js' %}"></script>
 		<script src="{% static 'scrape/js/jquery.zoom.min.js' %}"></script>
-		<script src="{% static 'scrape/js/main.js' %}"></script>
+    <script src="{% static 'scrape/js/main.js' %}"></script>
 </body>
 </html>

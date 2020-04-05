@@ -22,6 +22,8 @@ def home(request):
 def new_search(request):
     search=request.POST.get('search')
     models.Search.objects.create(search=search)
+
+    #AMAZON STUFF HERE
     final_amazon_url=BASE_AMAZON_URL.format(quote_plus(search))
     response=requests.get(final_amazon_url)
     data=response.content

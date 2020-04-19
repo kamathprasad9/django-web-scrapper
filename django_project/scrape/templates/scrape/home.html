@@ -102,7 +102,12 @@
 					<!-- Products tab & slick -->
 				</div>
 				<!-- /row -->
-				<h3 style="text-align: center;">Go ahead, login, and start crawling!</h3>
+				{% if user.is_authenticated %}
+					<h3 style="text-align: center;">Now that you are logged in, start crawling!</h3>
+	            {% else %}
+					<h3 style="text-align: center;">Go ahead, login, and start crawling!</h3>
+                {% endif %}
+				
 			</div>
 			<!-- /container -->
 		</div>
